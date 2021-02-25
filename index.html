@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
     <title>Document</title>
 </head>
 
@@ -422,7 +421,7 @@
 
 <p class="title" id="reviews-title">ОТЗЫВЫ НАШИХ КЛИЕНТОВ</p>
 
-<div class="review-arrows-container invisible">
+<div class="review-arrows-container invisible gone">
     <img src="./resources/direction.png" alt="arrow" id="prev">
     <img src="./resources/direction.png" alt="arrow" id="next">
 </div>
@@ -517,7 +516,7 @@
     </div>
 </div>
 <div class="review-button-container">
-    <button>Оставить отзыв</button>
+    <button class="leave-review-button">Оставить отзыв</button>
 </div>
 
 <div class="questions">
@@ -585,10 +584,32 @@
         </a>
     </div>
 
-    <div class="address-button">
-        <button>Hahoma 12, Rishon LeTsiyon, Israel</button>
+    <div class="address-button-container">
+        <button class="address-button">Hahoma 12, Rishon LeTsiyon, Israel</button>
     </div>
 </div>
+
+<div class="modal-background gone">
+    <div class="modal-request">
+        <div class="close-icon-container">
+            <img src="resources/close-icon-8.png" alt="close" class="close-icon">
+        </div>
+        <div class="request-container">
+            <p class="title">ОСТАВЬТЕ ЗАЯВКУ</p>
+            <p>и наш менеджер свяжется с Вами в течении дня
+                и подробно расскажет о нашей услуге</p>
+
+            <div class="input-container">
+                <input type="text" placeholder="Имя">
+                <input type="tel" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="Телефон">
+            </div>
+
+            <button class="send-request">Оставить заявку</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 
 </html>

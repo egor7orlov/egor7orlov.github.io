@@ -12,11 +12,12 @@ const headerSqueezer = {
         const getCallButton = document.querySelector('.header .get-call button');
         logoContainer.style.cursor = 'pointer';
 
+        phoneNumber.classList.add(displayNoneClass);
+        getCallButton.classList.add(displayNoneClass);
+
         header.classList.remove('header-on-top');
         headSpacer.classList.remove('header-on-top');
         logoContainer.classList.remove('logo-on-top');
-        phoneNumber.classList.add(zeroOpacityClass);
-        getCallButton.classList.add(zeroOpacityClass);
     },
 
     expandHeader() {
@@ -27,11 +28,11 @@ const headerSqueezer = {
         const getCallButton = document.querySelector('.header .get-call button');
         logoContainer.style.cursor = 'default';
 
+        phoneNumber.classList.remove(displayNoneClass);
+        getCallButton.classList.remove(displayNoneClass);
         header.classList.add('header-on-top');
         headSpacer.classList.add('header-on-top');
         logoContainer.classList.add('logo-on-top');
-        phoneNumber.classList.remove(zeroOpacityClass);
-        getCallButton.classList.remove(zeroOpacityClass);
     }
 };
 const scroller = {
@@ -66,9 +67,17 @@ const reviewsSwiper = {
         const isReviewsVisible = reviewsBoundingY >= -halfOfWindowHeight && reviewsBoundingY <= halfOfWindowHeight;
 
         if (isReviewsVisible) {
-            arrowsContainer.classList.remove(zeroOpacityClass);
+            arrowsContainer.classList.remove(displayNoneClass);
+
+            setTimeout(() => {
+                arrowsContainer.classList.remove(zeroOpacityClass);
+            }, 400);
         } else {
             arrowsContainer.classList.add(zeroOpacityClass);
+
+            setTimeout(() => {
+                arrowsContainer.classList.add(displayNoneClass);
+            }, 400);
         }
     },
 
@@ -167,6 +176,12 @@ const windowsOpener = {
         const addressUrl = 'https://www.google.com/maps/place/Hahoma+12,+Rishon+LeTsiyon,+Israel';
 
         window.open(addressUrl, '_blank');
+    },
+
+    openFacebookPage() {
+        const addressUrl = 'https://www.facebook.com/telepromtv/';
+
+        window.open(addressUrl, '_blank');
     }
 };
 
@@ -174,16 +189,19 @@ const windowsOpener = {
 window.addEventListener('load', () => {
     setClientArrowsSwipe();
     setLogoContainerClick();
-    setAddressButtonClick();
+    setAddressButtOnClick();
+    setCloseModalOnClick();
+    setButtonsOpenRequestOnClick();
+    setLeaveReviewOnClick();
 });
 
 window.addEventListener('scroll', () => {
     const yScrollPosition = Math.ceil(window.scrollY);
 
     if (yScrollPosition === 0) {
-        headerSqueezer.expandHeader();
+        // headerSqueezer.expandHeader();
     } else {
-        headerSqueezer.squeezeHeader();
+        // headerSqueezer.squeezeHeader();
     }
 
     reviewsSwiper.detectReviewsAndShowArrows();
@@ -211,10 +229,36 @@ function setClientArrowsSwipe() {
     });
 }
 
-function setAddressButtonClick() {
-    const addressButton = document.querySelector('.address-button button');
+function setAddressButtOnClick() {
+    const addressButton = document.querySelector('.address-button-container button');
 
     addressButton.addEventListener('click', () => {
         windowsOpener.openAddressOnMap();
     });
+}
+
+function setButtonsOpenRequestOnClick() {
+    const buttons = document.querySelectorAll('button:not(.leave-review-button, .address-button, .close-icon)');
+    const modalOverlay = document.querySelector('.modal-background');
+
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            modalOverlay.classList.remove(displayNoneClass);
+        });
+    });
+}
+
+function setCloseModalOnClick() {
+    const closeIcon = document.querySelector('.close-icon');
+    const modalOverlay = document.querySelector('.modal-background');
+
+    closeIcon.addEventListener('click', () => {
+        modalOverlay.classList.add(displayNoneClass);
+    });
+}
+
+function setLeaveReviewOnClick() {
+    const leaveReviewButton = document.querySelector('.leave-review-button');
+
+    leaveReviewButton.addEventListener('click', windowsOpener.openFacebookPage);
 }

@@ -11,12 +11,16 @@ html {
     color: #333;
 }
 
-::-webkit-scrollbar {
+.reviews::-webkit-scrollbar {
     all: unset;
 }
 
 .invisible {
     opacity: 0;
+}
+
+.gone {
+    display: none !important;
 }
 
 ul {
@@ -193,6 +197,20 @@ button {
     height: 60%;
 }
 
+/*MODAL*/
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
 @media screen and (min-width: 800px) {
 
     body,
@@ -223,10 +241,10 @@ button {
         position: fixed;
         display: flex;
         width: 100%;
-        height: 10%;
+        height: 14%;
         background-color: #fff;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         transition: all 0.4s ease-in-out;
 
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.420);
@@ -234,13 +252,12 @@ button {
 
     #head-spacer {
         width: 100%;
-        height: 10%;
+        height: 14%;
         transition: all 0.4s ease-in-out;
     }
 
     .header-on-top {
         height: fit-content !important;
-        /*height: 14% !important;*/
     }
 
     .logo-container {
@@ -264,9 +281,8 @@ button {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 40%;
+        width: 35%;
         font-size: 1em;
-        text-align: end;
     }
 
     .get-call button {
@@ -457,6 +473,7 @@ button {
         display: flex;
         flex-direction: column;
         height: fit-content;
+        min-height: 200px;
         width: 100%;
     }
 
@@ -488,12 +505,12 @@ button {
     .economy-picture {
         height: 100%;
         width: 50%;
-        background: url('./resources/economy-pic.jpg') no-repeat center;
-        background-size: cover;
+        overflow: hidden;
     }
 
     .economy-picture img {
-        display: none;
+        min-height: 100%;
+        min-width: 100%;
     }
 
     /* ------------------------- How to become a client ------------------------- */
@@ -534,7 +551,7 @@ button {
     }
 
     /* --------------------------------- Reviews -------------------------------- */
-    .review-arrows-container{
+    .review-arrows-container {
         position: fixed;
         top: 50%;
         display: flex;
@@ -571,14 +588,14 @@ button {
     }
 
     .reviews {
-        min-height: 70%;
+        max-height: fit-content;
         width: 100%;
         margin-bottom: 3%;
         display: flex;
         flex-direction: row;
         align-items: flex-start;
         justify-content: center;
-        overflow: scroll;
+        /*overflow: scroll;*/
     }
 
     .reviews-container {
@@ -588,7 +605,8 @@ button {
         max-width: 85%;
         min-width: 85%;
         max-height: 100%;
-        min-height: 100%;
+        min-height: 60%;
+        /*overflow: scroll;*/
     }
 
     .client {
@@ -599,10 +617,6 @@ button {
         width: 70%;
         height: 95%;
         margin-top: 5%;
-    }
-
-    .gone {
-        display: none;
     }
 
     .client img:not(#prev, #next) {
@@ -699,23 +713,91 @@ button {
         margin-top: 3%;
     }
 
-    .footer .address-button {
+    .footer .address-button-container {
         display: flex;
         align-items: center;
         justify-content: flex-end;
     }
 
-    .footer .address-button {
+    .footer .address-button-container {
         width: 30%;
     }
 
-    .footer .address-button button {
+    .footer .address-button-container button {
         width: 80%;
     }
 
     /* -------------------------- Global bottom margin -------------------------- */
     body > div:not(.header, #head-spacer, .reviews, .review-arrows-container) {
         margin-bottom: 3% !important;
+    }
+
+    /* MODAL REQUEST------------------------------------------------------------- */
+    .modal-request {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 35%;
+        min-height: 45%;
+        padding: 0 5%;
+        background-color: #fff;
+    }
+
+    .close-icon-container {
+        display: flex;
+        flex-direction: row-reverse;
+        width: 100%;
+        height: fit-content;
+    }
+
+    .close-icon {
+        margin: 0;
+        transform: scale(0.2);
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
+    }
+
+    .close-icon:active {
+        transform: scale(0.1);
+    }
+
+    .request-container {
+        padding: 0 10% 10% 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .request-container p {
+        text-align: center;
+        margin: 0 0 5% 0;
+    }
+
+    .request-container p:not(.title) {
+        font-weight: 200;
+    }
+
+    .request-container input {
+        border: 0;
+        border-bottom: 2px solid;
+        outline: 0;
+        padding: 3% 0;
+        background: transparent;
+    }
+
+    .send-request {
+        margin-top: 5%;
+        width: fit-content;
+        height: 10%;
+        padding: 3%;
+    }
+
+    .send-request p {
+        font-size: 0.8em;
     }
 }
 
@@ -766,7 +848,8 @@ button {
     }
 
     #logo {
-        max-width: 100%;
+        width: 100%;
+        max-height: 90%;
     }
 
     .sales {
@@ -972,7 +1055,7 @@ button {
     }
 
     /* --------------------------------- Reviews -------------------------------- */
-    .review-arrows-container{
+    .review-arrows-container {
         position: fixed;
         top: 50%;
         display: flex;
@@ -984,7 +1067,7 @@ button {
     }
 
     .reviews {
-        height: 120%;
+        height: fit-content;
         width: 100%;
         margin-bottom: 3%;
         display: flex;
@@ -1025,8 +1108,8 @@ button {
         max-width: 70%;
         min-width: 70%;
         max-height: 100%;
-        min-height: 100%;
-        overflow: scroll;
+        min-height: 10%;
+        /*overflow: scroll;*/
     }
 
     .client {
@@ -1039,10 +1122,6 @@ button {
         max-height: 95%;
         min-height: 95%;
         margin-top: 5%;
-    }
-
-    .gone {
-        display: none;
     }
 
     .client img:not(#prev, #next) {
@@ -1077,6 +1156,7 @@ button {
     }
 
     .review-button-container {
+        margin-top: 15%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1132,7 +1212,7 @@ button {
         margin-top: 3%;
     }
 
-    .footer .address-button {
+    .footer .address-button-container {
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -1142,5 +1222,76 @@ button {
     /* -------------------------- Global bottom margin -------------------------- */
     body > div:not(.header, #head-spacer, .reviews) {
         margin-bottom: 12% !important;
+    }
+
+    /* MODAL REQUEST------------------------------------------------------------- */
+    .modal-request {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 65%;
+        min-height: 45%;
+        padding: 0 5%;
+        background-color: #fff;
+    }
+
+    .close-icon-container {
+        display: flex;
+        flex-direction: row-reverse;
+        width: 100%;
+        height: 5%;
+    }
+
+    .close-icon {
+        display: block;
+        margin: 0;
+        transform: scale(0.2);
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
+    }
+
+    .close-icon:active {
+        transform: scale(0.1);
+    }
+
+    .request-container {
+        padding: 0 10% 10% 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .request-container p {
+        text-align: center;
+        margin: 0 0 5% 0;
+    }
+
+    .request-container p:not(.title) {
+        font-weight: 200;
+    }
+
+    .request-container input {
+        display: block;
+        border: 0;
+        border-bottom: 2px solid;
+        outline: 0;
+        padding: 3% 0;
+        background: transparent;
+        margin: 5% auto 0;
+    }
+
+    .send-request {
+        margin-top: 10%;
+        width: fit-content;
+        height: 10%;
+        padding: 3%;
+    }
+
+    .send-request p {
+        font-size: 0.8em;
     }
 }
