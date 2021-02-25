@@ -59,30 +59,43 @@ const scroller = {
     }
 };
 const reviewsSwiper = {
+    detectReviewsAndShowArrows() {
+        const halfOfWindowHeight = (window.innerHeight || document.documentElement.clientHeight) / 2;
+        const reviewsBoundingY = Math.round(document.querySelector('.reviews-container').getBoundingClientRect().y);
+        const arrowsContainer = document.querySelector('.review-arrows-container');
+        const isReviewsVisible = reviewsBoundingY >= -halfOfWindowHeight && reviewsBoundingY <= halfOfWindowHeight;
+
+        if (isReviewsVisible) {
+            arrowsContainer.classList.remove(zeroOpacityClass);
+        } else {
+            arrowsContainer.classList.add(zeroOpacityClass);
+        }
+    },
+
     hideCurrentAndShow(certainIdSelector) {
         const currentClientElements = this._getCurrentClientElements();
         const currentClient = currentClientElements.client;
         const currentChildElements = Array.from(currentClientElements.childElements);
 
-        const ceratainClientElements = this._getCertainClientElements(certainIdSelector);
-        const ceratainClient = ceratainClientElements.client;
-        const certainChildElements = Array.from(ceratainClientElements.childElements);
+        const certainClientElements = this._getCertainClientElements(certainIdSelector);
+        const certainClient = certainClientElements.client;
+        const certainChildElements = Array.from(certainClientElements.childElements);
 
         this._toggleReviewsArrowsAccess();
         this._toggleOpacityOfElements(currentChildElements);
-        this._doThenableClientsDisappearing(currentClient, ceratainClient)
+        this._doThenableClientsDisappearing(currentClient, certainClient)
             .then(() => {
                 this._toggleOpacityOfElements(certainChildElements);
                 this._toggleReviewsArrowsAccess();
             });
     },
 
-    _doThenableClientsDisappearing(currentClient, ceratainClient) {
+    _doThenableClientsDisappearing(currentClient, certainClient) {
         const opacityTransitionTime = 200;
 
         return new Promise((resolve) => {
             setTimeout(() => {
-                ceratainClient.classList.toggle(displayNoneClass);
+                certainClient.classList.toggle(displayNoneClass);
 
                 setTimeout(() => {
                     currentClient.classList.toggle(displayNoneClass);
@@ -111,14 +124,14 @@ const reviewsSwiper = {
         const currentClient = document.querySelector('.reviews .client:not(.gone)');
         const currentChildElements = document.querySelectorAll(`#${currentClient.id} img, #${currentClient.id} p`);
 
-        return { client: currentClient, childElements: currentChildElements };
+        return {client: currentClient, childElements: currentChildElements};
     },
 
     _getCertainClientElements(idSelector) {
-        const ceratainClient = document.querySelector(idSelector);
+        const certainClient = document.querySelector(idSelector);
         const certainChildElements = document.querySelectorAll(`${idSelector} img, ${idSelector} p`);
 
-        return { client: ceratainClient, childElements: certainChildElements };
+        return {client: certainClient, childElements: certainChildElements};
     },
 
     getPrevClientIdSelector() {
@@ -150,7 +163,7 @@ const reviewsSwiper = {
     }
 };
 const windowsOpener = {
-    openAddresOnMap() {
+    openAddressOnMap() {
         const addressUrl = 'https://www.google.com/maps/place/Hahoma+12,+Rishon+LeTsiyon,+Israel';
 
         window.open(addressUrl, '_blank');
@@ -172,6 +185,8 @@ window.addEventListener('scroll', () => {
     } else {
         headerSqueezer.squeezeHeader();
     }
+
+    reviewsSwiper.detectReviewsAndShowArrows();
 });
 
 /* --------------------------- Listeners wrappers --------------------------- */
@@ -200,6 +215,6 @@ function setAddressButtonClick() {
     const addressButton = document.querySelector('.address-button button');
 
     addressButton.addEventListener('click', () => {
-        windowsOpener.openAddresOnMap();
+        windowsOpener.openAddressOnMap();
     });
 }
