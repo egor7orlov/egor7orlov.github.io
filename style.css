@@ -87,6 +87,11 @@ button {
     width: 40%;
 }
 
+.tv {
+    top: 0;
+    transition: all 0.4s ease-out;
+}
+
 .tv-screen,
 .tv-container {
     display: flex;
@@ -197,7 +202,7 @@ button {
     height: 60%;
 }
 
-/*MODAL*/
+/* ------------------------------Modal------------------------------ */
 .modal-background {
     position: fixed;
     top: 0;
@@ -211,7 +216,8 @@ button {
     z-index: 1000;
 }
 
-@media screen and (min-width: 800px) {
+/* -----------------------------Desktop----------------------------- */
+@media screen and (min-width: 768px) {
 
     body,
     html {
@@ -241,23 +247,23 @@ button {
         position: fixed;
         display: flex;
         width: 100%;
-        height: 14%;
+        min-height: 12%;
         background-color: #fff;
         align-items: center;
         justify-content: space-between;
-        transition: all 0.4s ease-in-out;
+        transition: all 0.1s ease-in-out;
 
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.420);
     }
 
     #head-spacer {
         width: 100%;
-        height: 14%;
+        min-height: 12%;
         transition: all 0.4s ease-in-out;
     }
 
     .header-on-top {
-        height: fit-content !important;
+        min-height: 20% !important;
     }
 
     .logo-container {
@@ -283,6 +289,7 @@ button {
         justify-content: center;
         width: 35%;
         font-size: 1em;
+        transition: all 0.4s ease-in-out;
     }
 
     .get-call button {
@@ -662,6 +669,7 @@ button {
         align-items: center;
         justify-content: center;
         margin-top: 7%;
+        transition: all 0.2s ease-in-out;
     }
 
     /* -------------------------------- Questions ------------------------------- */
@@ -685,7 +693,6 @@ button {
         margin-top: 7%;
     }
 
-
     .video iframe {
         width: 63.5%;
         height: 96%;
@@ -697,7 +704,8 @@ button {
         flex-direction: row;
         margin-top: 5%;
         padding-top: 3%;
-        background-color: #efefef;
+        background: linear-gradient(90deg, #efefef 50%, #efefef00),
+        url(./resources/teleprom_map.png) no-repeat right;
     }
 
     .footer .instructions,
@@ -740,7 +748,7 @@ button {
         align-items: center;
         width: 35%;
         min-height: 45%;
-        padding: 0 5%;
+        padding: 0 3%;
         background-color: #fff;
     }
 
@@ -801,7 +809,8 @@ button {
     }
 }
 
-@media screen and (max-width: 800px) {
+/* -----------------------------Mobile------------------------------ */
+@media screen and (max-width: 767px) {
 
     body,
     html {
@@ -822,7 +831,6 @@ button {
         align-items: center;
         justify-content: center;
         transition: all 0.4s ease-in-out;
-
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.420);
     }
 
@@ -864,6 +872,18 @@ button {
     .get-call button {
         transition: all 0.4s ease-in-out;
         font-size: 0.8em;
+    }
+
+    .tv,
+    .advantages,
+    .main-advantage,
+    .opportunities,
+    .subscriptions,
+    .payment-methods,
+    .economy,
+    .client-stages,
+    .reviews {
+        overflow: hidden;
     }
 
     /* ----------------------------------- TV ----------------------------------- */
@@ -1049,9 +1069,8 @@ button {
     }
 
     .client-stages .stage-arrow {
-        margin: 0 auto;
         margin: 5% 0;
-        transform: rotate(90deg);
+        transform: rotate(90deg) !important;
     }
 
     /* --------------------------------- Reviews -------------------------------- */
@@ -1160,6 +1179,7 @@ button {
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: all 0.2s ease-in-out;
     }
 
 
@@ -1214,9 +1234,13 @@ button {
 
     .footer .address-button-container {
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: flex-end;
+        height: 20em;
         padding: 3%;
+        background: linear-gradient(#efefef 5%, #efefef00),
+        url(./resources/teleprom_map.png) no-repeat center;
+        background-size: cover;
     }
 
     /* -------------------------- Global bottom margin -------------------------- */
@@ -1232,7 +1256,7 @@ button {
         align-items: center;
         width: 65%;
         min-height: 45%;
-        padding: 0 5%;
+        padding: 0 3%;
         background-color: #fff;
     }
 

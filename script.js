@@ -12,8 +12,8 @@ const headerSqueezer = {
         const getCallButton = document.querySelector('.header .get-call button');
         logoContainer.style.cursor = 'pointer';
 
-        phoneNumber.classList.add(displayNoneClass);
-        getCallButton.classList.add(displayNoneClass);
+        phoneNumber.classList.add(zeroOpacityClass);
+        getCallButton.classList.add(zeroOpacityClass);
 
         header.classList.remove('header-on-top');
         headSpacer.classList.remove('header-on-top');
@@ -28,8 +28,8 @@ const headerSqueezer = {
         const getCallButton = document.querySelector('.header .get-call button');
         logoContainer.style.cursor = 'default';
 
-        phoneNumber.classList.remove(displayNoneClass);
-        getCallButton.classList.remove(displayNoneClass);
+        phoneNumber.classList.remove(zeroOpacityClass);
+        getCallButton.classList.remove(zeroOpacityClass);
         header.classList.add('header-on-top');
         headSpacer.classList.add('header-on-top');
         logoContainer.classList.add('logo-on-top');
@@ -90,11 +90,13 @@ const reviewsSwiper = {
         const certainClient = certainClientElements.client;
         const certainChildElements = Array.from(certainClientElements.childElements);
 
+        const reviewButtonContainer = document.querySelector('.review-button-container');
+
         this._toggleReviewsArrowsAccess();
-        this._toggleOpacityOfElements(currentChildElements);
+        this._toggleOpacityOfElements([...currentChildElements, reviewButtonContainer]);
         this._doThenableClientsDisappearing(currentClient, certainClient)
             .then(() => {
-                this._toggleOpacityOfElements(certainChildElements);
+                this._toggleOpacityOfElements([...certainChildElements, reviewButtonContainer]);
                 this._toggleReviewsArrowsAccess();
             });
     },
@@ -184,81 +186,212 @@ const windowsOpener = {
         window.open(addressUrl, '_blank');
     }
 };
+const listenersSetter = {
+    setLogoContainerClick() {
+        const logoContainer = document.querySelector('.logo-container');
+
+        logoContainer.addEventListener('click', () => {
+            scroller.scrollToTop();
+        });
+    },
+
+    setClientArrowsSwipe() {
+        const prevArrow = document.querySelector('#prev');
+        const nextArrow = document.querySelector('#next');
+
+        prevArrow.addEventListener('click', () => {
+            reviewsSwiper.hideCurrentAndShow(reviewsSwiper.getPrevClientIdSelector());
+        });
+
+        nextArrow.addEventListener('click', () => {
+            reviewsSwiper.hideCurrentAndShow(reviewsSwiper.getNextClientIdSelector());
+        });
+    },
+
+    setAddressButtOnClick() {
+        const addressButton = document.querySelector('.address-button-container button');
+
+        addressButton.addEventListener('click', () => {
+            windowsOpener.openAddressOnMap();
+        });
+    },
+
+    setButtonsOpenRequestOnClick() {
+        const buttons = document.querySelectorAll('button:not(.leave-review-button, .address-button, .close-icon)');
+        const modalOverlay = document.querySelector('.modal-background');
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                modalOverlay.classList.remove(displayNoneClass);
+            });
+        });
+    },
+
+    setCloseModalOnClick() {
+        const closeIcon = document.querySelector('.close-icon');
+        const modalOverlay = document.querySelector('.modal-background');
+
+        closeIcon.addEventListener('click', () => {
+            modalOverlay.classList.add(displayNoneClass);
+        });
+    },
+
+    setLeaveReviewOnClick() {
+        const leaveReviewButton = document.querySelector('.leave-review-button');
+
+        leaveReviewButton.addEventListener('click', windowsOpener.openFacebookPage);
+    },
+};
+const animator = {
+    animateOnScroll() {
+        this._animateAdvantages();
+        this._animateMainAdvantage();
+        this._animateOpportunities();
+        this._animateSubscription();
+        this._animateEconomy();
+        this._animateClientStages();
+        this._animateReviews();
+        this._animateVideo();
+        this._animateFooter();
+    },
+
+    /* ----------------------Sections' animations----------------------- */
+    showTv() {
+        const tv = document.querySelector('.tv');
+
+        tv.classList.add('animate__fadeInUp');
+    },
+
+    _animateAdvantages() {
+        const advantagesAmount = 8;
+
+        if (this._isElementInViewport('.advantage')) {
+            this._applyAnimation('#advantages-header', 'animate__fadeInDown');
+
+            for (let i = 1; i <= advantagesAmount; i++) {
+                const id = '#advantage-' + i;
+
+                if (i % 2 !== 0) {
+                    this._applyAnimation(id, 'animate__fadeInLeft');
+                } else {
+                    this._applyAnimation(id, 'animate__fadeInRight');
+                }
+            }
+        }
+    },
+
+    _animateMainAdvantage() {
+        if (this._isElementInViewport('.main-advantage .title')) {
+            this._applyAnimation('.main-advantage .title', 'animate__fadeInLeft');
+            this._applyAnimation('.main-advantage .text', 'animate__fadeInRight');
+        }
+    },
+
+    _animateOpportunities() {
+        if (this._isElementInViewport('.opportunities .opportunities-container')) {
+            this._applyAnimation('.opportunities .title', 'animate__fadeInUp');
+
+            const opportunities = Array.from(document.querySelectorAll('.opportunities .opportunity'));
+
+            opportunities.forEach((opportunity) => {
+                opportunity.classList.add('animate__flipInX');
+                opportunity.classList.remove(zeroOpacityClass);
+            });
+        }
+    },
+
+    _animateSubscription() {
+        if (this._isElementInViewport('.subscription.econom')) {
+            this._applyAnimation('.subscription.econom', 'animate__fadeInUp');
+            this._applyAnimation('.subscription.main', 'animate__fadeInDown');
+        }
+    },
+
+    _animateEconomy() {
+        if (this._isElementInViewport('.economy-list')) {
+            const economyPoints = Array.from(document.querySelectorAll('.economy-point'));
+
+            for (let i = 0; i < economyPoints.length; i++) {
+                const economyPoint = economyPoints[i];
+
+                setTimeout(() => {
+                    economyPoint.classList.add('animate__fadeInBottomRight');
+                    economyPoint.classList.remove(zeroOpacityClass);
+                }, 200 * i);
+            }
+        }
+    },
+
+    _animateClientStages() {
+        if (this._isElementInViewport('.stage-arrow')) {
+            const arrows = Array.from(document.querySelectorAll('.stage-arrow'));
+
+            for (let i = 0; i < arrows.length; i++) {
+                const arrow = arrows[i];
+
+                setTimeout(() => {
+                    arrow.classList.add('animate__bounceIn');
+                    arrow.classList.remove(zeroOpacityClass);
+                }, 200 * i);
+            }
+        }
+    },
+
+    _animateReviews() {
+        if (this._isElementInViewport('.reviews-container')) {
+            this._applyAnimation('.reviews-container', 'animate__fadeInUp');
+        }
+    },
+
+    _animateVideo() {
+        if (this._isElementInViewport('.video')) {
+            this._applyAnimation('.video', 'animate__fadeIn');
+        }
+    },
+
+    _animateFooter() {
+        if (this._isElementInViewport('.instructions')) {
+            this._applyAnimation('.instructions', 'animate__fadeInLeft');
+            this._applyAnimation('.support', 'animate__fadeInLeft');
+            this._applyAnimation('.address-button-container', 'animate__fadeInRight');
+        }
+    },
+
+    /* -------------------------Utility methods------------------------- */
+    _isElementInViewport(selector) {
+        const halfOfWindowHeight = (window.innerHeight || document.documentElement.clientHeight);
+        const reviewsBoundingY = Math.round(document.querySelector(selector).getBoundingClientRect().y);
+        return reviewsBoundingY >= -halfOfWindowHeight && reviewsBoundingY <= halfOfWindowHeight;
+    },
+
+    _applyAnimation(toSelector, animationClass) {
+        const elementToAnimate = document.querySelector(toSelector);
+
+        elementToAnimate.classList.add(animationClass);
+        elementToAnimate.classList.remove(zeroOpacityClass);
+    }
+};
 
 /* ----------------------------- Event listeners ---------------------------- */
 window.addEventListener('load', () => {
-    setClientArrowsSwipe();
-    setLogoContainerClick();
-    setAddressButtOnClick();
-    setCloseModalOnClick();
-    setButtonsOpenRequestOnClick();
-    setLeaveReviewOnClick();
+    listenersSetter.setClientArrowsSwipe();
+    listenersSetter.setLogoContainerClick();
+    listenersSetter.setAddressButtOnClick();
+    listenersSetter.setCloseModalOnClick();
+    listenersSetter.setButtonsOpenRequestOnClick();
+    listenersSetter.setLeaveReviewOnClick();
+    animator.showTv();
 });
 
 window.addEventListener('scroll', () => {
     const yScrollPosition = Math.ceil(window.scrollY);
 
     if (yScrollPosition === 0) {
-        // headerSqueezer.expandHeader();
+        headerSqueezer.expandHeader();
     } else {
-        // headerSqueezer.squeezeHeader();
+        headerSqueezer.squeezeHeader();
     }
 
     reviewsSwiper.detectReviewsAndShowArrows();
+    animator.animateOnScroll();
 });
-
-/* --------------------------- Listeners wrappers --------------------------- */
-function setLogoContainerClick() {
-    const logoContainer = document.querySelector('.logo-container');
-
-    logoContainer.addEventListener('click', () => {
-        scroller.scrollToTop();
-    });
-}
-
-function setClientArrowsSwipe() {
-    const prevArrow = document.querySelector('#prev');
-    const nextArrow = document.querySelector('#next');
-
-    prevArrow.addEventListener('click', () => {
-        reviewsSwiper.hideCurrentAndShow(reviewsSwiper.getPrevClientIdSelector());
-    });
-
-    nextArrow.addEventListener('click', () => {
-        reviewsSwiper.hideCurrentAndShow(reviewsSwiper.getNextClientIdSelector());
-    });
-}
-
-function setAddressButtOnClick() {
-    const addressButton = document.querySelector('.address-button-container button');
-
-    addressButton.addEventListener('click', () => {
-        windowsOpener.openAddressOnMap();
-    });
-}
-
-function setButtonsOpenRequestOnClick() {
-    const buttons = document.querySelectorAll('button:not(.leave-review-button, .address-button, .close-icon)');
-    const modalOverlay = document.querySelector('.modal-background');
-
-    buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-            modalOverlay.classList.remove(displayNoneClass);
-        });
-    });
-}
-
-function setCloseModalOnClick() {
-    const closeIcon = document.querySelector('.close-icon');
-    const modalOverlay = document.querySelector('.modal-background');
-
-    closeIcon.addEventListener('click', () => {
-        modalOverlay.classList.add(displayNoneClass);
-    });
-}
-
-function setLeaveReviewOnClick() {
-    const leaveReviewButton = document.querySelector('.leave-review-button');
-
-    leaveReviewButton.addEventListener('click', windowsOpener.openFacebookPage);
-}
