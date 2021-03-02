@@ -11,7 +11,7 @@ html {
     color: #333;
 }
 
-.reviews::-webkit-scrollbar {
+.reviews-container::-webkit-scrollbar {
     all: unset;
 }
 
@@ -247,7 +247,7 @@ button {
         position: fixed;
         display: flex;
         width: 100%;
-        min-height: 10%;
+        min-height: 75px;
         background-color: #fff;
         align-items: center;
         justify-content: space-between;
@@ -258,12 +258,12 @@ button {
 
     #head-spacer {
         width: 100%;
-        min-height: 10%;
+        min-height: 8%;
         transition: all 0.4s ease-in-out;
     }
 
     .header-on-top {
-        min-height: 13% !important;
+        min-height: 85px !important;
     }
 
     .logo-container {
@@ -558,20 +558,9 @@ button {
     }
 
     /* --------------------------------- Reviews -------------------------------- */
-    .review-arrows-container {
-        position: fixed;
-        top: 50%;
-        display: flex;
-        width: 100%;
-        height: 10%;
-        align-items: center;
-        justify-content: space-between;
-        transition: all 0.4s ease-in-out;
-    }
-
     #prev,
     #next {
-        margin: 0 5%;
+        /*margin: 0 5%;*/
         max-width: 3%;
         min-width: 3%;
         transition: all 0.4s ease-out;
@@ -600,9 +589,9 @@ button {
         margin-bottom: 3%;
         display: flex;
         flex-direction: row;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
-        /*overflow: scroll;*/
+        height: 60%;
     }
 
     .reviews-container {
@@ -611,23 +600,24 @@ button {
         justify-content: center;
         max-width: 85%;
         min-width: 85%;
-        max-height: 100%;
-        min-height: 60%;
-        /*overflow: scroll;*/
+        padding-bottom: 5%;
+        height: 100%;
+        overflow: scroll;
     }
 
     .client {
         display: flex;
         flex-direction: row;
-        align-items: center;
-        justify-content: start;
+        align-items: flex-start;
+        justify-content: flex-end;
         width: 70%;
-        height: 95%;
-        margin-top: 5%;
+        height: fit-content;
+        /*margin-top: 5%;*/
     }
 
     .client img:not(#prev, #next) {
         width: 35%;
+        margin-top: 5%;
         box-shadow: 0 0 10px #333;
     }
 
@@ -736,7 +726,7 @@ button {
     }
 
     /* -------------------------- Global bottom margin -------------------------- */
-    body > div:not(.header, #head-spacer, .reviews, .review-arrows-container) {
+    body > div:not(.header, #head-spacer, .reviews) {
         margin-bottom: 3% !important;
     }
 
@@ -856,7 +846,6 @@ button {
     }
 
     #logo {
-        width: 100%;
         max-height: 90%;
     }
 
@@ -1074,25 +1063,14 @@ button {
     }
 
     /* --------------------------------- Reviews -------------------------------- */
-    .review-arrows-container {
-        position: fixed;
-        top: 50%;
-        display: flex;
-        width: 100%;
-        height: 10%;
-        align-items: center;
-        justify-content: space-between;
-        transition: all 0.4s ease-in-out;
-    }
-
     .reviews {
-        height: fit-content;
         width: 100%;
         margin-bottom: 3%;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
+        height: 100%;
     }
 
     #prev,
@@ -1126,9 +1104,10 @@ button {
         justify-content: center;
         max-width: 70%;
         min-width: 70%;
-        max-height: 100%;
-        min-height: 10%;
-        /*overflow: scroll;*/
+        /*max-height: 100%;*/
+        /*min-height: 10%;*/
+        height: 100%;
+        overflow: scroll;
     }
 
     .client {
@@ -1138,8 +1117,9 @@ button {
         justify-content: start;
         max-width: 70%;
         min-width: 70%;
-        max-height: 95%;
-        min-height: 95%;
+        /*max-height: 95%;*/
+        /*min-height: 95%;*/
+        height: fit-content;
         margin-top: 5%;
     }
 

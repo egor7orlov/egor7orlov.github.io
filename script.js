@@ -12,8 +12,10 @@ const headerSqueezer = {
         const getCallButton = document.querySelector('.header .get-call button');
         logoContainer.style.cursor = 'pointer';
 
-        phoneNumber.classList.add(zeroOpacityClass);
-        getCallButton.classList.add(zeroOpacityClass);
+        phoneNumber.classList.add('animate__backOutLeft');
+        getCallButton.classList.add('animate__backOutRight');
+        phoneNumber.classList.remove('animate__backInLeft');
+        getCallButton.classList.remove('animate__backInRight');
 
         header.classList.remove('header-on-top');
         headSpacer.classList.remove('header-on-top');
@@ -28,8 +30,10 @@ const headerSqueezer = {
         const getCallButton = document.querySelector('.header .get-call button');
         logoContainer.style.cursor = 'default';
 
-        phoneNumber.classList.remove(zeroOpacityClass);
-        getCallButton.classList.remove(zeroOpacityClass);
+        phoneNumber.classList.add('animate__backInLeft');
+        getCallButton.classList.add('animate__backInRight');
+        phoneNumber.classList.remove('animate__backOutLeft');
+        getCallButton.classList.remove('animate__backOutRight');
         header.classList.add('header-on-top');
         headSpacer.classList.add('header-on-top');
         logoContainer.classList.add('logo-on-top');
@@ -60,27 +64,6 @@ const scroller = {
     }
 };
 const reviewsSwiper = {
-    detectReviewsAndShowArrows() {
-        const halfOfWindowHeight = (window.innerHeight || document.documentElement.clientHeight) / 2;
-        const reviewsBoundingY = Math.round(document.querySelector('.reviews-container').getBoundingClientRect().y);
-        const arrowsContainer = document.querySelector('.review-arrows-container');
-        const isReviewsVisible = reviewsBoundingY >= -halfOfWindowHeight && reviewsBoundingY <= halfOfWindowHeight;
-
-        if (isReviewsVisible) {
-            arrowsContainer.classList.remove(displayNoneClass);
-
-            setTimeout(() => {
-                arrowsContainer.classList.remove(zeroOpacityClass);
-            }, 400);
-        } else {
-            arrowsContainer.classList.add(zeroOpacityClass);
-
-            setTimeout(() => {
-                arrowsContainer.classList.add(displayNoneClass);
-            }, 400);
-        }
-    },
-
     hideCurrentAndShow(certainIdSelector) {
         const currentClientElements = this._getCurrentClientElements();
         const currentClient = currentClientElements.client;
@@ -93,10 +76,10 @@ const reviewsSwiper = {
         const reviewButtonContainer = document.querySelector('.review-button-container');
 
         this._toggleReviewsArrowsAccess();
-        this._toggleOpacityOfElements([...currentChildElements, reviewButtonContainer]);
+        this._toggleOpacityOfElements(currentChildElements);
         this._doThenableClientsDisappearing(currentClient, certainClient)
             .then(() => {
-                this._toggleOpacityOfElements([...certainChildElements, reviewButtonContainer]);
+                this._toggleOpacityOfElements(certainChildElements);
                 this._toggleReviewsArrowsAccess();
             });
     },
@@ -392,6 +375,6 @@ window.addEventListener('scroll', () => {
         headerSqueezer.squeezeHeader();
     }
 
-    reviewsSwiper.detectReviewsAndShowArrows();
+    // reviewsSwiper.detectReviewsAndShowArrows();
     animator.animateOnScroll();
 });
