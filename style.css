@@ -247,7 +247,7 @@ button {
         position: fixed;
         display: flex;
         width: 100%;
-        min-height: 12%;
+        min-height: 10%;
         background-color: #fff;
         align-items: center;
         justify-content: space-between;
@@ -258,12 +258,12 @@ button {
 
     #head-spacer {
         width: 100%;
-        min-height: 12%;
+        min-height: 10%;
         transition: all 0.4s ease-in-out;
     }
 
     .header-on-top {
-        min-height: 20% !important;
+        min-height: 13% !important;
     }
 
     .logo-container {
@@ -278,7 +278,7 @@ button {
     }
 
     #logo {
-        /*width: 70%;*/
+        width: 70%;
         max-height: 90%;
     }
 
@@ -748,7 +748,7 @@ button {
         align-items: center;
         width: 35%;
         min-height: 45%;
-        padding: 0 3%;
+        padding: 0 20px;
         background-color: #fff;
     }
 
@@ -771,7 +771,7 @@ button {
     }
 
     .request-container {
-        padding: 0 10% 10% 10%;
+        padding: 0 7% 7% 7%;
         display: flex;
         flex-direction: column;
         justify-content: center;
