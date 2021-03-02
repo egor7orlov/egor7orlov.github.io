@@ -68,6 +68,17 @@ button {
     z-index: 999;
 }
 
+.logo-container.logo-on-top:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.42);
+    border-radius: 10px;
+}
+
 .instructions p,
 .support p {
     color: #e31f2d;
@@ -252,7 +263,7 @@ button {
         align-items: center;
         justify-content: space-between;
         transition: all 0.1s ease-in-out;
-        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.420);
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.42);
     }
 
     #head-spacer {
@@ -283,17 +294,6 @@ button {
 
     #logo {
         height: 55px;
-    }
-
-    .logo-container.logo-on-top:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 10px;
-        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.42);
-        border-radius: 10px;
     }
 
     .sales {
@@ -830,7 +830,7 @@ button {
         position: fixed;
         display: flex;
         width: 100%;
-        height: 7%;
+        height: 75px;
         background-color: #fff;
         align-items: center;
         justify-content: center;
@@ -840,12 +840,12 @@ button {
 
     #head-spacer {
         width: 100%;
-        height: 7%;
+        height: 75px;
         transition: all 0.4s ease-in-out;
     }
 
     .header-on-top {
-        height: 9% !important;
+        height: 85px !important;
     }
 
     .logo-container {
