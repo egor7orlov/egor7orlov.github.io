@@ -247,23 +247,22 @@ button {
         position: fixed;
         display: flex;
         width: 100%;
-        min-height: 75px;
+        height: 75px;
         background-color: #fff;
         align-items: center;
         justify-content: space-between;
         transition: all 0.1s ease-in-out;
-
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.420);
     }
 
     #head-spacer {
         width: 100%;
-        min-height: 8%;
+        height: 75px;
         transition: all 0.4s ease-in-out;
     }
 
     .header-on-top {
-        min-height: 85px !important;
+        height: 85px !important;
     }
 
     .logo-container {
@@ -275,6 +274,11 @@ button {
         background-color: #fff;
         border-radius: 0 0 5% 5%;
         transition: all 0.4s ease-in-out;
+    }
+
+    .logo-on-top{
+        position: relative;
+        height: 150%;
     }
 
     #logo {
@@ -816,7 +820,7 @@ button {
         position: fixed;
         display: flex;
         width: 100%;
-        height: 8%;
+        height: 7%;
         background-color: #fff;
         align-items: center;
         justify-content: center;
@@ -826,12 +830,12 @@ button {
 
     #head-spacer {
         width: 100%;
-        height: 8%;
+        height: 7%;
         transition: all 0.4s ease-in-out;
     }
 
     .header-on-top {
-        height: 12% !important;
+        height: 9% !important;
     }
 
     .logo-container {
@@ -839,14 +843,18 @@ button {
         align-items: center;
         justify-content: center;
         width: 20%;
-        height: 100%;
+        height: 90%;
         background-color: #fff;
         border-radius: 0 0 5% 5%;
         transition: all 0.4s ease-in-out;
     }
 
+    .logo-on-top {
+        height: 140%;
+    }
+
     #logo {
-        max-height: 90%;
+        width: 100%;
     }
 
     .sales {

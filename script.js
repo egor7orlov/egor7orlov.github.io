@@ -19,7 +19,10 @@ const headerSqueezer = {
 
         header.classList.remove('header-on-top');
         headSpacer.classList.remove('header-on-top');
-        logoContainer.classList.remove('logo-on-top');
+
+        setTimeout(() => {
+            logoContainer.classList.remove('logo-on-top');
+        }, 300);
     },
 
     expandHeader() {
@@ -36,7 +39,10 @@ const headerSqueezer = {
         getCallButton.classList.remove('animate__fadeOutUp');
         header.classList.add('header-on-top');
         headSpacer.classList.add('header-on-top');
-        logoContainer.classList.add('logo-on-top');
+
+        setTimeout(() => {
+            logoContainer.classList.add('logo-on-top');
+        }, 300);
     }
 };
 const scroller = {
