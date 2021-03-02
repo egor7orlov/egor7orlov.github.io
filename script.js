@@ -370,6 +370,7 @@ window.addEventListener('load', () => {
     listenersSetter.setButtonsOpenRequestOnClick();
     listenersSetter.setLeaveReviewOnClick();
     animator.showTv();
+    animateAdvantagesIfInView();
 });
 
 window.addEventListener('scroll', () => {
@@ -384,3 +385,14 @@ window.addEventListener('scroll', () => {
     // reviewsSwiper.detectReviewsAndShowArrows();
     animator.animateOnScroll();
 });
+
+/* ----------------------------Functions---------------------------- */
+function animateAdvantagesIfInView() {
+    const advantages = document.querySelector('.advantages');
+
+    if (visualViewport.pageTop <= advantages.offsetTop) {
+        setTimeout(() => {
+            animator._animateAdvantages();
+        }, 300);
+    }
+}
