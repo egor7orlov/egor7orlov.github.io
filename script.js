@@ -12,10 +12,10 @@ const headerSqueezer = {
         const getCallButton = document.querySelector('.header .get-call button');
         logoContainer.style.cursor = 'pointer';
 
-        phoneNumber.classList.add('animate__backOutLeft');
-        getCallButton.classList.add('animate__backOutRight');
-        phoneNumber.classList.remove('animate__backInLeft');
-        getCallButton.classList.remove('animate__backInRight');
+        phoneNumber.classList.add('animate__fadeOutUp');
+        getCallButton.classList.add('animate__fadeOutUp');
+        phoneNumber.classList.remove('animate__fadeInDown');
+        getCallButton.classList.remove('animate__fadeInDown');
 
         header.classList.remove('header-on-top');
         headSpacer.classList.remove('header-on-top');
@@ -30,10 +30,10 @@ const headerSqueezer = {
         const getCallButton = document.querySelector('.header .get-call button');
         logoContainer.style.cursor = 'default';
 
-        phoneNumber.classList.add('animate__backInLeft');
-        getCallButton.classList.add('animate__backInRight');
-        phoneNumber.classList.remove('animate__backOutLeft');
-        getCallButton.classList.remove('animate__backOutRight');
+        phoneNumber.classList.add('animate__fadeInDown');
+        getCallButton.classList.add('animate__fadeInDown');
+        phoneNumber.classList.remove('animate__fadeOutUp');
+        getCallButton.classList.remove('animate__fadeOutUp');
         header.classList.add('header-on-top');
         headSpacer.classList.add('header-on-top');
         logoContainer.classList.add('logo-on-top');
